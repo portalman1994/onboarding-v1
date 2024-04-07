@@ -5,11 +5,80 @@ function checks_system_arch() {
     architecture_type="$(uname -m)"
 
     if [ "$architecture_type" == "arm64" ]; then
-        echo "Your system architecture is apple silicon-based"
+        echo "ARM64"
     else
-        echo "Your sytem architecture is intel-based"
+        echo "INTEL"
     fi 
 }
+
+# installs specific software
+function downloads_docker() {
+    local system_architecture="$(checks_system_arch)"
+    
+    cd ~/Downloads
+    
+    if [ "$system_architecture" == "ARM64"]; then
+        echo "Downloading docker.dmg..."
+        curl -sOL https://desktop.docker.com/mac/main/arm64/Docker.dmg
+        "Downloaded docker.dmg"
+    else
+        echo "Downloading docker.dmg..."
+        curl -sOL https://desktop.docker.com/mac/main/amd64/Docker.dmg
+        "Downloaded docker.dmg"
+    fi
+}
+function installs_brew() {
+    echo "Installing brew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+}
+
+function installs_dbeaver() {
+    echo "Installing dbeaver..."
+    brew install --cask dbeaver-community
+    echo "Dbeaver installation complete..."
+}
+
+function installs_docker() {
+    downloads_docker
+    cd ~/Downloads
+    echo "Beginning Docker installation..."
+    sudo hdutil attach Docker.dmg
+    echo "This may take a few minutes..."
+    sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
+    echo "Performing maintenance tasks..."
+    sudo hdiutil detach /Volumes/Docker
+    echo "Docker Installation complete..."
+}
+
+function installs_git() {
+    echo "Installing git..."
+    brew install git
+}
+
+function installs_mkcert() {
+    echo "Installing mkcert..."
+    brew install mkcert
+}
+
+function installs_nvm() {
+    echo "Installing nvm..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh)"
+}
+
+function installs_postgres() {
+    echo "Installing postgres..."
+    brew install postgresql
+}
+
+function installs_vscode() {
+    echo "Installing vscode..."
+    
+}
+
+function installs_yarn() {
+
+}
+
 # checks if specific software is installed
 
 function is_brew_installed() {
