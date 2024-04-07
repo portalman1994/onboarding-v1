@@ -83,7 +83,7 @@ function is_postgres_installed() {
 }
 
 function is_vscode_installed() {
-    local vscode_command="$()"
+    local vscode_command="$(which code)"
 
     if [ "$vscode_command" ]; then
         echo "vscode is installed"
