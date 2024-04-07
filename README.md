@@ -1,8 +1,7 @@
 ### Guide to Running the script
 Simply download the script and run the following commands in the terminal:
 
-```chmod +x onboarding-v1.sh```
-```./onboarding-v1.sh```
+```chmod +x onboarding-v1.sh && ./onboarding-v1.sh```
 
 Note: Make sure you are in the proper directory when attempting to run the script.
 
