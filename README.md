@@ -1,11 +1,17 @@
 ### Guide to Running the script
-Simply download the script and run the following commands in the terminal:
+Simply run the following commands in the terminal:
 
+Download the script to your local machine:
+```bash
+curl -O https://raw.githubusercontent.com/portalman1994/onboarding-v1/main/onboarding-v1.sh
+```
+Make the shell script executable:
 ```bash
 chmod +x onboarding-v1.sh
 ```
+Run the shell script:
 ```bash
 ./onboarding-v1.sh
 ```
-
-Note: Make sure you are in the proper directory when attempting to run the script.
+## Note:
+Make sure you are in the proper directory when attempting to run the script.
