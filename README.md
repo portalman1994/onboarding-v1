@@ -1,5 +1,7 @@
-### Guide to Running the script
-Simply run the following commands in the terminal:
+## An onboarding bash script (Mac OS)
+Supports the following architectures: Intel and Silicon
+
+### Guide to running the script
 
 Download the script to your local machine:
 ```bash
@@ -13,5 +15,5 @@ Run the shell script:
 ```bash
 ./onboarding-v1.sh
 ```
-## Note:
+### Note:
 Make sure you are in the proper directory when attempting to run the script.
