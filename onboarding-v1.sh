@@ -27,6 +27,14 @@ function downloads_docker() {
         echo "Downloaded docker.dmg"
     fi
 }
+
+function downloads_postgres() {
+    cd ~/Downloads
+    echo "Downloading postgres.dmg version 16..."
+    curl -sOL "https://github.com/PostgresApp/PostgresApp/releases/download/v2.7.2/Postgres-2.7.2-16.dmg"
+    echo "Downloaded postgres.dmg"
+}
+
 function cleanup_vscode() {
     cd ~/Downloads
     echo "Unzipping vscode zip file..."
@@ -34,12 +42,14 @@ function cleanup_vscode() {
     echo "Removing vscode zip file..."
     rm VSCode-darwin-universal.zip
 }
+
 function downloads_vscode() {
     cd ~/Downloads
     echo "Downloading vscode zip file..."
     curl -sOLJ "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
     echo "Downloaded vscode!"
 }
+
 function installs_brew() {
     echo "Installing brew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -81,7 +91,16 @@ function installs_nvm() {
 
 function installs_postgres() {
     echo "Installing postgres..."
-    brew install postgresql
+    downloads_postgres
+    cd ~/Downloads
+    echo "Beginning Postgres installation..."
+    sudo hdiutil attach Postgres*.dmg
+    echo "This may take a few minutes..."
+    sudo cp -R /Volumes/Postgres-2.7.2-16/Postgres.app /Applications
+    echo "Performing maintenance tasks..." 
+    sudo hdiutil detach /Volumes/Postgres-2.7.2-16
+    rm Postgres*.dmg
+    echo "Postgres installation complete!"
 }
 
 function installs_vscode() {
@@ -167,7 +186,7 @@ function is_nvm_installed() {
 }
 
 function is_postgres_installed() {
-    local postgres_command="$(which psql)"
+    local postgres_command="$(mdfind "kMDItemDisplayName == 'Postgres'")"
 
     if [ "$postgres_command" ]; then
         echo "postgresql is installed"
