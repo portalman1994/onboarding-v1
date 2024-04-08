@@ -1,4 +1,4 @@
-#!/bin/bash
+h#!/bin/bash
 
 # checks system architecture
 function checks_system_arch() {
@@ -17,14 +17,14 @@ function downloads_docker() {
     
     cd ~/Downloads
     
-    if [ "$system_architecture" == "ARM64"]; then
+    if [ "$system_architecture" == "ARM64" ]; then
         echo "Downloading docker.dmg..."
         curl -sOL https://desktop.docker.com/mac/main/arm64/Docker.dmg
-        "Downloaded docker.dmg"
+        echo "Downloaded docker.dmg"
     else
         echo "Downloading docker.dmg..."
         curl -sOL https://desktop.docker.com/mac/main/amd64/Docker.dmg
-        "Downloaded docker.dmg"
+        echo "Downloaded docker.dmg"
     fi
 }
 function cleanup_vscode() {
