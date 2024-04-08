@@ -27,15 +27,29 @@ function downloads_docker() {
         "Downloaded docker.dmg"
     fi
 }
+function cleanup_vscode() {
+    cd ~/Downloads
+    echo "Unzipping vscode zip file..."
+    unzip VSCode-darwin-universal.zip
+    echo "Removing vscode zip file..."
+    rm VSCode-darwin-universal.zip
+}
+function downloads_vscode() {
+    cd ~/Downloads
+    echo "Downloading vscode zip file..."
+    curl -sOLJ "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
+    echo "Downloaded vscode!"
+}
 function installs_brew() {
     echo "Installing brew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    echo "Brew installation complete!"
 }
 
 function installs_dbeaver() {
     echo "Installing dbeaver..."
     brew install --cask dbeaver-community
-    echo "Dbeaver installation complete..."
+    echo "DBeaver installation complete!"
 }
 
 function installs_docker() {
@@ -72,11 +86,17 @@ function installs_postgres() {
 
 function installs_vscode() {
     echo "Installing vscode..."
-    
+    downloads_vscode
+    cleanup_vscode
+    cd ~/Downloads
+    mv "Visual Studio Code.app" /Applications/
+    echo "Visual Studio Code installation complete!"
 }
 
 function installs_yarn() {
-
+    echo "Installing yarn..."
+    brew install yarn
+    echo "Yarn installation complete!"
 }
 
 # checks if specific software is installed
@@ -88,6 +108,7 @@ function is_brew_installed() {
         echo "brew is installed"
     else
         echo "brew is not installed"
+        installs_brew
     fi
 }
 
@@ -98,16 +119,18 @@ function is_dbeaver_installed() {
         echo "dbeaver is installed"
     else
         echo "dbeaver is not installed"
+        installs_dbeaver
     fi
 }
 
 function is_docker_installed() {
-    local docker_command="$(which docker-credential-desktop)"
+    local docker_command="$(mdfind "kMDItemDisplayName == 'Docker'")"
 
     if [ "$docker_command" ]; then
         echo "docker desktop is installed"
     else
         echo "docker desktop is not installed"
+        installs_docker
     fi
 }
 
@@ -128,6 +151,7 @@ function is_mkcert_installed() {
         echo "mkcert is installed"
     else
         echo "mkcert is not installed"
+        installs_mkcert
     fi
 }
 
@@ -138,6 +162,7 @@ function is_nvm_installed() {
         echo "nvm is installed"
     else
         echo "nvm is not installed"
+        installs_nvm
     fi
 }
 
@@ -148,16 +173,18 @@ function is_postgres_installed() {
         echo "postgresql is installed"
     else
         echo "postgresql in not installed"
+        installs_postgres
     fi
 }
 
 function is_vscode_installed() {
-    local vscode_command="$(which code)"
+    local vscode_command="$(mdfind "kMDItemDisplayName == 'Visual Studio Code'")"
 
     if [ "$vscode_command" ]; then
         echo "vscode is installed"
     else
         echo "vscode is not installed"
+        installs_vscode
     fi
 }
 
@@ -168,6 +195,7 @@ function is_yarn_installed() {
         echo "yarn is installed"
     else
         echo "yarn is not installed"
+        installs_yarn
     fi
 }
 
@@ -183,7 +211,6 @@ function check_installation() {
     is_vscode_installed
     is_yarn_installed
 
-    echo "Please refer to README file to install software"
 }
-checks_system_arch
+
 check_installation
