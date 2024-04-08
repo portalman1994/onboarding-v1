@@ -56,7 +56,7 @@ function installs_docker() {
     downloads_docker
     cd ~/Downloads
     echo "Beginning Docker installation..."
-    sudo hdutil attach Docker.dmg
+    sudo hdiutil attach Docker.dmg
     echo "This may take a few minutes..."
     sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
     echo "Performing maintenance tasks..."
