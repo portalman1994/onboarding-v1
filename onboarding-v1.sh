@@ -1,4 +1,4 @@
-h#!/bin/bash
+#!/bin/bash
 
 # checks system architecture
 function checks_system_arch() {
