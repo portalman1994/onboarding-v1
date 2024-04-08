@@ -156,9 +156,9 @@ function is_mkcert_installed() {
 }
 
 function is_nvm_installed() {
-    local nvm_command="$(which nvm)"
+    local nvm_command="$(type -p nvm)"
 
-    if [ "$nvm_command" ]; then
+    if [ -z "$nvm_command" ]; then
         echo "nvm is installed"
     else
         echo "nvm is not installed"
