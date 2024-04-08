@@ -2,7 +2,7 @@
 Supports the following architectures: Intel and Silicon
 
 ### Guide to running the script
-
+![screenshot](https://github.com/portalman1994/onboarding-v1/blob/main/screenshot.png?raw=true)
 Download the script to your local machine:
 ```bash
 curl -O https://raw.githubusercontent.com/portalman1994/onboarding-v1/main/onboarding-v1.sh
