@@ -160,6 +160,7 @@ function is_git_installed() {
         echo "git is installed"
     else 
         echo "git is not installed"
+        installs_git
     fi
 }
 
